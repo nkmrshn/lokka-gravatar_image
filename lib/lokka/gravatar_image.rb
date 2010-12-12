@@ -12,18 +12,6 @@ module Lokka
         flash[:notice] = t.gravatar_image_updated
         redirect '/admin/plugins/gravatar_image'
       end
-
-      app.get '/gravatar_image/:id' do |id|
-        user = User.get(id)
-        url_scheme = request.env['rack.url_scheme']
-        redirect GravatarImage.url(user.email, url_scheme) unless user.blank?
-      end
-
-      app.get '/gravatar_image/:id/:size' do |id, size|
-        user = User.get(id)
-        url_scheme = request.env['rack.url_scheme']
-        redirect GravatarImage.url(user.email, url_scheme, size) unless user.blank?
-      end
     end
   
     def self.url(email, url_scheme = "http", size = nil)
@@ -53,6 +41,13 @@ module Lokka
       url += "?" + data.join("&") if data.size > 0
 
       return url
+    end
+  end
+
+  module Helpers
+    def gravatar_image_url(email, size = nil)
+      url_scheme = request.env['rack.url_scheme']
+      GravatarImage.url(email, url_scheme, size)
     end
   end
 end

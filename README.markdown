@@ -14,11 +14,9 @@ Run these commands:
 Usage
 -----
 
-The URL for src property in the img element is like:
+The helper is "gravatar_image_url". The first parameter is email and second is image size which is optional. If you didn't specify the image size, it will be 80px as the Gravatar Image request default.
 
-    <img src="/gravatar_image/<%= post.user.id %>"/>
-    <img src="/gravatar_image/<%= @entry.user.id %>/16"/>
-
-The first URL, in the src property is passing user's ID. The second one is passing user's ID and the image size(in this case it is 16px). If you didn't specify the size of image, like the first URL, it will be 80px.
+    <img src="<%= gravatar_image_url(post.user.email) %>"/>
+    <img src="<%= gravatar_image_url(@entry.user.email, 16) %>"/>
 
 You can specify other options, like rating, in the Admin->[Plugins]->[Gravatar Image].
