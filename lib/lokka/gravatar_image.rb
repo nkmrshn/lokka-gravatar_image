@@ -15,6 +15,8 @@ module Lokka
     end
   
     def self.url(email, url_scheme = "http", size = nil)
+      return if email.blank?
+
       email = email.strip.downcase
       hash = Digest::MD5.hexdigest(email)
       default = Option.gravatar_image_default
