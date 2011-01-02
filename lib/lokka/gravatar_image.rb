@@ -7,7 +7,7 @@ module Lokka
 
       app.put '/admin/plugins/gravatar_image' do
         params.each_pair do |key, value|
-          eval("Option.#{key}='#{value}'")
+          eval("Option.#{key}='#{value}'") if key != '_method'
         end 
         flash[:notice] = t.gravatar_image_updated
         redirect '/admin/plugins/gravatar_image'
