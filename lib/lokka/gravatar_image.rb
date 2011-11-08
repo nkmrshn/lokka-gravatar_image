@@ -8,12 +8,12 @@ module Lokka
       app.put '/admin/plugins/gravatar_image' do
         params.each_pair do |key, value|
           eval("Option.#{key}='#{value}'") if key != '_method'
-        end 
+        end
         flash[:notice] = t.gravatar_image_updated
         redirect '/admin/plugins/gravatar_image'
       end
     end
-  
+
     def self.url(email, url_scheme = "http", size = nil)
       return if email.blank?
 
